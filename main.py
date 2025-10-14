@@ -13,14 +13,14 @@ def menu():
 ==============================
 SISTEMA AGRÍCOLA INTEGRADO
 ==============================
-1. Adicionar Novo Resultado (Brix e IM)
+1. Adicionar Novo Resultado do Dia
 2. Exibir Resultados
 3. Remover Resultado
 4. Salvar Resultados
 5. Prever Momento Ideal de Colheita
 6. Gerar Gráfico de Evolução
 7. Carregar Dados
-8. Sair
+0. Sair
 ==============================
 """)
         opc = input("Escolha: ").strip()
@@ -41,12 +41,12 @@ SISTEMA AGRÍCOLA INTEGRADO
             else:
                 print("Memória vazia. Nada para salvar.")
         elif opc == "5":
-            prever_momento_colheita(memoria)
-        elif opc == "6":
-            gerar_grafico(memoria)
-        elif opc == "7":
             carregar_dados(memoria)
-        elif opc == "8":
+        elif opc == "6":
+            prever_momento_colheita(memoria)
+        elif opc == "7":
+            gerar_grafico(memoria)
+        elif opc == "0":
             print("Encerrando o sistema...")
             break
         else:
