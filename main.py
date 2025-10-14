@@ -10,6 +10,9 @@ Versão final consolidada:
 - Conexão Oracle via oracledb
 """
 
+import matplotlib.pyplot as plt
+import numpy as np
+from datetime import datetime, timedelta
 import json
 import os
 import oracledb
@@ -217,6 +220,111 @@ def contar_resultados(memoria):
     print(f"Oracle: {oracle_count}")
     print("----------------------------\n")
 
+
+
+def prever_momento_colheita(memoria):
+    print("\n--- PREVISÃO DE MOMENTO IDEAL DE COLHEITA ---")
+
+    if not memoria:
+        print("Nenhum dado disponível para previsão.")
+        return
+
+    # Simulando que cada entrada na memória representa uma coleta diária
+    dias = np.arange(len(memoria))
+    brix_values = [r.get("brix", 0) for r in memoria]
+    im_values = [r.get("IM", 0) for r in memoria]
+
+    # Ajuste de regressão polinomial de grau 2 (curva suave)
+    coef_brix = np.polyfit(dias, brix_values, 2)
+    coef_im = np.polyfit(dias, im_values, 2)
+
+    poly_brix = np.poly1d(coef_brix)
+    poly_im = np.poly1d(coef_im)
+
+    # Previsão futura
+    dias_futuros = np.linspace(0, len(memoria) + 10, 100)
+    previsao_brix = poly_brix(dias_futuros)
+    previsao_im = poly_im(dias_futuros)
+
+    # Determinar o ponto mais próximo da maturação ideal
+    for i, (b, im) in enumerate(zip(previsao_brix, previsao_im)):
+        if b >= 18 and 0.95 <= im <= 1.05:
+            dias_para_colheita = i - len(memoria)
+            data_prevista = datetime.now() + timedelta(days=dias_para_colheita)
+            print(f"\n📅 Previsão: A cana deve atingir o ponto ideal em aproximadamente {dias_para_colheita} dias.")
+            print(f"Data estimada da colheita: {data_prevista.strftime('%d/%m/%Y')}")
+            break
+    else:
+        print("\n⚠️ Nenhum ponto ideal previsto nos próximos 10 dias.")
+
+def gerar_grafico(memoria):
+    print("\n--- GRÁFICO DE EVOLUÇÃO DO BRIX E IM ---")
+
+    if not memoria:
+        print("Nenhum dado disponível para gerar gráfico.")
+        return
+
+    dias = np.arange(1, len(memoria) + 1)
+    brix_values = [r.get("brix", 0) for r in memoria]
+    im_values = [r.get("IM", 0) for r in memoria]
+
+    plt.figure(figsize=(10, 6))
+    plt.plot(dias, brix_values, marker='o', label="Brix (°)")
+    plt.plot(dias, im_values, marker='x', label="Índice de Maturação (IM)")
+
+    plt.axhline(18, color='green', linestyle='--', label="Brix ideal (18°)")
+    plt.axhline(1.0, color='orange', linestyle='--', label="IM ideal (1.0)")
+
+    plt.title("Evolução do Brix e Índice de Maturação da Cana-de-Açúcar")
+    plt.xlabel("Dias de amostragem")
+    plt.ylabel("Valor medido")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+def momento_ideal_colheita(memoria):
+    print("\n--- ANÁLISE DE MOMENTO IDEAL DE COLHEITA ---")
+    if not memoria:
+        print("Nenhum dado disponível na memória.")
+        return
+
+    colheitas_ideais = []
+    verdes = []
+    supermaturas = []
+
+    for r in memoria:
+        brix = r.get("brix", 0)
+        im = r.get("IM", 0)
+
+        if brix >= 18 and 0.95 <= im <= 1.05:
+            colheitas_ideais.append(r)
+        elif im < 0.95:
+            verdes.append(r)
+        elif im > 1.05:
+            supermaturas.append(r)
+
+    print("\nResultados classificados:")
+    print("-" * 40)
+
+    if colheitas_ideais:
+        print("\n✅ Cana pronta para colheita:")
+        for r in colheitas_ideais:
+            print(f"  Brix: {r['brix']} | IM: {r['IM']}")
+    else:
+        print("\n⚠️ Nenhum lote ideal para colheita no momento.")
+
+    if verdes:
+        print("\n🌱 Cana ainda verde:")
+        for r in verdes:
+            print(f"  Brix: {r['brix']} | IM: {r['IM']}")
+
+    if supermaturas:
+        print("\n🥀 Cana supermatura (risco de degradação):")
+        for r in supermaturas:
+            print(f"  Brix: {r['brix']} | IM: {r['IM']}")
+
+    print("-" * 40)
+
 # ===========================
 # SUBMENUS DE EXIBIÇÃO & AÇÕES
 # ===========================
@@ -354,14 +462,22 @@ def menu():
     memoria = []
     while True:
         contar_resultados(memoria)
-        print("""\n=== SISTEMA AGRÍCOLA INTEGRADO ===
-1. Adicionar Novo Resultado (Brix e IM)
-2. Exibir Resultados
-3. Remover Resultado (Memória / JSON / Oracle)
-4. Carregar resultados do JSON para Memória
-5. Salvar Resultados (JSON / TXT / Oracle)
-6. Sair
-==================================""")
+        print("""
+        ==============================
+        SISTEMA AGRÍCOLA INTEGRADO
+        ==============================
+        1. Adicionar Novo Resultado (Brix e IM)
+        2. Exibir Resultados
+        3. Remover Resultado
+        4. Carregar resultados do JSON para Memória
+        5. Salvar Resultados
+        6. Analisar Momento Ideal de Colheita
+        7. Prever Data Ideal de Colheita
+        8. Gerar Gráfico de Evolução
+        9. Sair
+        ==============================
+        """)
+
         opc = input("Escolha: ").strip()
         if opc == "1":
             r = procedimento_calculo()
@@ -377,7 +493,13 @@ def menu():
         elif opc == "5":
             salvar_resultados(memoria)
         elif opc == "6":
-            print("Encerrando. Até a próxima!")
+            momento_ideal_colheita(memoria)
+        elif opc == "7":
+            prever_momento_colheita(memoria)
+        elif opc == "8":
+            gerar_grafico(memoria)
+        elif opc == "9":
+            print("Encerrando o sistema...")
             break
         else:
             print("Opção inválida. Tente novamente.")
