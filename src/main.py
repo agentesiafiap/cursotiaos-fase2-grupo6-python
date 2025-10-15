@@ -17,9 +17,9 @@ SISTEMA AGRÍCOLA INTEGRADO
 2. Exibir Resultados
 3. Remover Resultado
 4. Salvar Resultados
-5. Prever Momento Ideal de Colheita
-6. Gerar Gráfico de Evolução
-7. Carregar Dados
+5. Carregar Dados
+6. Prever Momento Ideal de Colheita
+7. Gerar Gráfico de Evolução
 0. Sair
 ==============================
 """)

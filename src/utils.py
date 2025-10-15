@@ -64,7 +64,7 @@ def carregar_dados(memoria):
         dados = carregar_json()
         memoria.clear(); memoria.extend(dados)
     elif opc=="2":
-        from database_oracle import obter_resultados_oracle
+        from src.database_oracle import obter_resultados_oracle
         rows = obter_resultados_oracle()
         memoria.clear()
         for r in rows:
