@@ -279,6 +279,16 @@ O sistema demonstrou capacidade de:
 - **Critérios de Maturação**: Implementação dos valores de referência (BRIX ≥ 18°, IM 0,95-1,05)
 - **Aplicabilidade**: Solução adequada para produtores de cana-de-açúcar
 
+### 4.1.4. Visualização dos Resultados
+
+O sistema gera gráficos interativos que permitem:
+- Acompanhamento da evolução temporal do BRIX e Índice de Maturação
+- Projeções futuras baseadas em regressão linear para até 365 dias
+- Identificação visual do momento ideal de colheita
+- Comparação com valores de referência da indústria
+
+*Ver Figura 1 na seção de [Anexos](#c7) para exemplo de visualização gerada pelo sistema.*
+
 # <a name="c5"></a>5. Conclusões e Trabalhos Futuros
 
 ## 5.1. Conclusões
@@ -308,10 +318,27 @@ O sistema demonstrou capacidade de:
 
 # <a name="c7"></a>Anexos
 
-## Diagramas
+## Visualizações do Sistema
 
-- Gráfico de Evolução e Projeção do Brix e Índice de Maturação da Cana:
-  ![Fluxograma](Figure_1.png)
+### Gráfico de Evolução e Projeção do BRIX e Índice de Maturação
+
+O sistema gera automaticamente gráficos que mostram a evolução histórica dos dados coletados e projeções futuras baseadas em regressão linear. O gráfico abaixo demonstra:
+
+- **Linha Azul**: Evolução histórica do BRIX médio
+- **Linha Laranja**: Evolução histórica do Índice de Maturação
+- **Linhas Tracejadas**: Projeções futuras (365 dias)
+- **Linhas Pontilhadas**: Valores ideais de referência (BRIX = 18°, IM = 1.0)
+
+<div align="center">
+  <img src="../assets/Figure_1.png" alt="Gráfico de Evolução e Projeção do Brix e Índice de Maturação da Cana" width="80%">
+  <p><em>Figura 1: Análise temporal do BRIX e Índice de Maturação com projeções preditivas</em></p>
+</div>
+
+### Interpretação do Gráfico
+
+- **Zona Verde**: Período ideal para colheita (BRIX ≥ 18° e IM próximo de 1.0)
+- **Tendências**: As linhas tracejadas indicam quando a cana atingirá maturação ideal
+- **Precisão**: A regressão linear permite planejamento antecipado da colheita
 
 ## Tabelas
 
