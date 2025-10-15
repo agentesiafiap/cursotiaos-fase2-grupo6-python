@@ -6,51 +6,70 @@
 
 <br>
 
-# Nome do projeto
+# Gestão do agronegócio em python
 
-## Nome do grupo
+## Agentes IA Fiap
 
 ## 👨‍🎓 Integrantes: 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 1</a>
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 2</a>
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 3</a> 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 4</a> 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 5</a>
+- <a href="https://www.linkedin.com/in/daniel-baião-0b351049/">Daniel Emilio Baião</a>
+- <a href="https://www.linkedin.com/company/inova-fusca">Erik Criscuolo</a>
+- <a href="https://www.linkedin.com/company/inova-fusca">Marcus Garcia</a> 
+- <a href="https://www.linkedin.com/company/inova-fusca">Sidney Williams</a> 
+- <a href="https://www.linkedin.com/company/inova-fusca">Hugo Rodrigues</a>
 
 ## 👩‍🏫 Professores:
 ### Tutor(a) 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do Tutor</a>
+- <a href="https://www.linkedin.com/in/sabrina-otoni-22525519b/">Sabrina Otoni</a>
 ### Coordenador(a)
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do Coordenador</a>
+- <a href="https://www.linkedin.com/company/inova-fusca">André Godoi Chiovato</a>
 
 
 ## 📜 Descrição
 
-*Descreva seu projeto com base no texto do PBL (até 600 palavras)*
+O Sistema Agrícola Integrado é uma solução desenvolvida para auxiliar agricultores e empresas do setor agroindustrial no gerenciamento de dados agrícolas. O sistema permite o cálculo de resultados diários, previsão do momento ideal de colheita e geração de gráficos de evolução, utilizando algoritmos de Inteligência Artificial e ferramentas de visualização.
 
+## Funcionalidades
+
+- **Cálculo de Resultados Diários**: Processa dados agrícolas e armazena os resultados na memória.
+- **Exibição de Resultados**: Permite visualizar os resultados armazenados.
+- **Remoção de Resultados**: Remove resultados específicos da memória.
+- **Salvamento de Dados**: Salva os resultados em arquivos JSON e TXT, além de armazená-los em um banco de dados Oracle.
+- **Carregamento de Dados**: Carrega dados previamente salvos para a memória.
+- **Previsão do Momento Ideal de Colheita**: Utiliza algoritmos de IA para prever o melhor momento para a colheita.
+- **Geração de Gráficos**: Cria gráficos de evolução com base nos dados armazenados.
+
+## Tecnologias Utilizadas
+
+- **Linguagem de Programação**: Python
+- **Bibliotecas**: `matplotlib`, `json`, `cx_Oracle`
+- **Banco de Dados**: Oracle Database
+- **Ferramentas de Desenvolvimento**: Visual Studio Code
 
 ## 📁 Estrutura de pastas
 
 Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 
-- <b>.github</b>: Nesta pasta ficarão os arquivos de configuração específicos do GitHub que ajudam a gerenciar e automatizar processos no repositório.
-
 - <b>assets</b>: aqui estão os arquivos relacionados a elementos não-estruturados deste repositório, como imagens.
 
-- <b>config</b>: Posicione aqui arquivos de configuração que são usados para definir parâmetros e ajustes do projeto.
+- <b>config</b>: requirements.txt contendo as versões dos imports.
 
-- <b>document</b>: aqui estão todos os documentos do projeto que as atividades poderão pedir. Na subpasta "other", adicione documentos complementares e menos importantes.
+- <b>document</b>: Arquivo de documentação do projeto.
 
-- <b>scripts</b>: Posicione aqui scripts auxiliares para tarefas específicas do seu projeto. Exemplo: deploy, migrações de banco de dados, backups.
+- <b>src</b>: Todo o código fonte criado para o desenvolvimento do projeto, incluindo os arquivos exportados.
 
-- <b>src</b>: Todo o código fonte criado para o desenvolvimento do projeto ao longo das 7 fases.
-
-- <b>README.md</b>: arquivo que serve como guia e explicação geral sobre o projeto (o mesmo que você está lendo agora).
+- <b>README.md</b>: arquivo que serve como guia e explicação geral sobre o projeto.
 
 ## 🔧 Como executar o código
 
-*Acrescentar as informações necessárias sobre pré-requisitos (IDEs, serviços, bibliotecas etc.) e instalação básica do projeto, descrevendo eventuais versões utilizadas. Colocar um passo a passo de como o leitor pode baixar o seu código e executá-lo a partir de sua máquina ou seu repositório. Considere a explicação organizada em fase.*
-
+1. Certifique-se de ter o Python instalado na sua máquina.
+2. Instale as dependências do projeto executando o comando:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Execute o arquivo principal do sistema:
+   ```bash
+   python main.py
+   ```
 
 ## 🗃 Histórico de lançamentos
 
