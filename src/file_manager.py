@@ -1,8 +1,8 @@
 import json
 import os
 
-JSON_FILE = "../asssets/resultados_colheita.json"
-TXT_FILE = "../asssets/resultados_colheita.txt"
+JSON_FILE = "resultados_colheita.json"
+TXT_FILE = "resultados_colheita.txt"
 
 def carregar_json(arquivo=JSON_FILE):
     if not os.path.exists(arquivo): return []
